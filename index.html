@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Webson AR Base Template</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- A-Frame and AR.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe@1.5.0/dist/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.0/aframe/build/aframe-ar.js"></script>
+
+  <!-- Import map for modular JS -->
+  <script type="importmap">
+  {
+    "imports": {
+      "app": "./src/app.js",
+      "permissions": "./src/permissions.js",
+      "gps": "./src/gps.js",
+      "utils": "./src/utils.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- UI overlays -->
+  <div id="ui">
+    <div id="banner" class="hidden"></div>
+    <div id="controls">
+      <button id="enableMotion" class="hidden" aria-label="Enable Motion Sensors">Enable Motion Sensors</button>
+      <button id="useCoarseLocation" class="hidden" aria-label="Use Coarse Location">Use Coarse Location</button>
+    </div>
+    <div id="status">
+      <span id="camStatus">Camera: pending</span>
+      <span id="gpsStatus">GPS: pending</span>
+      <span id="motionStatus">Motion: pending</span>
+      <span id="distanceStatus">Distance: —</span>
+    </div>
+  </div>
+
+  <!-- A-Frame AR Scene -->
+  <a-scene
+    vr-mode-ui="enabled: false"
+    embedded
+    renderer="colorManagement: true; foveation: 1"
+    arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false">
+
+    <!-- AR Camera with GPS and rotation reader -->
+    <a-camera gps-camera rotation-reader></a-camera>
+
+    <!-- Example location-based entity -->
+    <a-entity id="poi"
+      gps-entity-place="latitude: 37.7749; longitude: -122.4194"
+      geometry="primitive: box; depth: 1; height: 1; width: 1"
+      material="color: #222"
+      position="0 0 0">
+    </a-entity>
+
+    <!-- Minimal lighting for visibility -->
+    <a-entity light="type: directional; intensity: 0.8" position="0 2 1"></a-entity>
+    <a-entity light="type: ambient; intensity: 0.6"></a-entity>
+  </a-scene>
+
+  <!-- App entry -->
+  <script type="module">
+    import initApp from "app";
+    initApp();
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
