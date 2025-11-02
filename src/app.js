@@ -1,10 +1,10 @@
-import { requestCamera, requestGeolocation, requestMotion, coarseGeolocation } from "permissions";
+import { requestGeolocation, requestMotion, coarseGeolocation } from "permissions";
 import { startGPSWatch, updateDistanceToPOI } from "gps";
 import { show } from "utils";
 
 export default function initApp() {
   // Request camera and GPS immediately
-  requestCamera();
+  // requestCamera();
 
   requestGeolocation(true).then(result => {
     if (result.ok) {
