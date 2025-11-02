@@ -41,9 +41,8 @@
   <!-- A-Frame AR Scene -->
   <a-scene
     vr-mode-ui="enabled: false"
-    embedded
     renderer="alpha: true; colorManagement: true; foveation: 1"
-    arjs="sourceType: webcam; facingMode: environment; videoTexture: true; trackingMethod: best; debugUIEnabled: false">
+    arjs="sourceType: webcam; facingMode: environment; videoTexture: false; trackingMethod: best; debugUIEnabled: false">
 
     <!-- AR Camera with GPS and rotation reader -->
     <a-camera gps-camera rotation-reader></a-camera>

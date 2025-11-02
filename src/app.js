@@ -9,6 +9,9 @@ export default function initApp() {
   // Monitor AR.js video readiness to update status
   const iv = setInterval(() => {
     const v = document.getElementById('arjs-video');
+    if (v) {
+      v.setAttribute('playsinline', ''); // Ensure inline playback on iOS
+    }
     if (v && (v.srcObject || v.readyState > 2 || v.videoWidth > 0)) {
       setText('camStatus', 'Camera: live');
       clearInterval(iv);
