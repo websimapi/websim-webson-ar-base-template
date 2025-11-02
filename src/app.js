@@ -1,10 +1,19 @@
-import { requestGeolocation, requestMotion, coarseGeolocation } from "permissions";
+import { requestGeolocation, requestMotion, coarseGeolocation, requestCamera } from "permissions";
 import { startGPSWatch, updateDistanceToPOI } from "gps";
-import { show } from "utils";
+import { show, setText } from "utils";
 
 export default function initApp() {
   // Request camera and GPS immediately
-  // requestCamera();
+  requestCamera();
+
+  // Monitor AR.js video readiness to update status
+  const iv = setInterval(() => {
+    const v = document.getElementById('arjs-video');
+    if (v && (v.srcObject || v.readyState > 2 || v.videoWidth > 0)) {
+      setText('camStatus', 'Camera: live');
+      clearInterval(iv);
+    }
+  }, 300);
 
   requestGeolocation(true).then(result => {
     if (result.ok) {
@@ -40,4 +49,3 @@ export default function initApp() {
   // Try to pre-set motion status for non-iOS
   requestMotion(false);
 }
-
