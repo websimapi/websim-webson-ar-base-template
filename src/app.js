@@ -10,7 +10,8 @@ export default function initApp() {
   const iv = setInterval(() => {
     const v = document.getElementById('arjs-video');
     if (v) {
-      v.setAttribute('playsinline', ''); // Ensure inline playback on iOS
+      v.setAttribute('playsinline', ''); // Redundant but safe
+      v.play().catch(e => console.warn("Video play failed:", e)); // Try to play video
     }
     if (v && (v.srcObject || v.readyState > 2 || v.videoWidth > 0)) {
       setText('camStatus', 'Camera: live');

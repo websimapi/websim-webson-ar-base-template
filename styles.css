@@ -6,14 +6,14 @@
 }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; height: 100%; background: var(--bg); color: var(--text); font-family: "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+html, body { margin: 0; padding: 0; height: 100%; background: transparent; color: var(--text); font-family: "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
 
 a-scene, canvas, .a-canvas {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  z-index: 1;
 }
 
 #arjs-video {
@@ -83,4 +83,3 @@ button:active { transform: scale(0.98); }
 }
 
 .hidden { display: none; }
-
